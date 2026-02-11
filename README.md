@@ -1,4 +1,4 @@
-<h1 align="center">✨ Streamify - Fullstack Chat & Video Calling App ✨</h1>
+<h1 align="center">✨ Suhel Chats - Fullstack Chat & Video Calling App ✨</h1>
 
 <p align="center">
   <img src="/frontend/public/screenshot-for-readme.png" alt="Demo App" width="100%" />

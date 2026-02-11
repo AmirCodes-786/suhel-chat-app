@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router";
 import useAuthUser from "../hooks/useAuthUser";
-import { BellIcon, LogOutIcon, ShipWheelIcon } from "lucide-react";
+import { BellIcon, LogOutIcon, MessageSquare } from "lucide-react";
 import ThemeSelector from "./ThemeSelector";
 import useLogout from "../hooks/useLogout";
 import ProfileModal from "./ProfileModal";
@@ -28,9 +28,9 @@ const Navbar = () => {
           {isChatPage && (
             <div className="pl-5">
               <Link to="/" className="flex items-center gap-2.5">
-                <ShipWheelIcon className="size-9 text-primary" />
-                <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary  tracking-wider">
-                  Streamify
+                <MessageSquare className="size-9 text-green-500" />
+                <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-600 tracking-wider">
+                  Suhel Chats
                 </span>
               </Link>
             </div>
