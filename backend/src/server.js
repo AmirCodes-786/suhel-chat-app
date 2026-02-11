@@ -52,11 +52,16 @@ if (process.env.NODE_ENV === "production") {
     app.get("*", (req, res) => {
       res.sendFile(path.join(frontendPath, "index.html"));
     });
+  } else {
+    // Fallback for separate backend deployment
+    app.get("/", (req, res) => {
+      res.send("API is running successfully (Production Fallback)");
+    });
   }
 } else {
-    app.get("/", (req, res) => {
-      res.send("API is running in development mode");
-    });
+  app.get("/", (req, res) => {
+    res.send("API is running in development mode");
+  });
 }
 
 app.listen(PORT, () => {
