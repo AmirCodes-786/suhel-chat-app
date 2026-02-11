@@ -31,6 +31,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/chat", chatRoutes);
 
+app.get("/api/health", (req, res) => {
+  res.send("API is running successfully");
+});
+
 if (process.env.NODE_ENV === "production") {
   const frontendPath = path.join(__dirname, "../frontend/dist");
 
@@ -41,12 +45,11 @@ if (process.env.NODE_ENV === "production") {
     app.get("*", (req, res) => {
       res.sendFile(path.join(frontendPath, "index.html"));
     });
-  } else {
-    // Fallback for separate backend deployment
-    app.get("/", (req, res) => {
-      res.send("API is running successfully");
-    });
   }
+} else {
+    app.get("/", (req, res) => {
+      res.send("API is running in development mode");
+    });
 }
 
 app.listen(PORT, () => {
