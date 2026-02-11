@@ -14,12 +14,19 @@ import { connectDB } from "./lib/db.js";
 const app = express();
 const PORT = process.env.PORT || 5001;
 
+// Trust proxy for secure cookies in production
+app.set("trust proxy", 1);
+
 const __dirname = path.resolve();
+
+const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
+// Remove trailing slash if present to avoid CORS mismatches
+const normalizedClientUrl = clientUrl.endsWith("/") ? clientUrl.slice(0, -1) : clientUrl;
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
-    credentials: true, // allow frontend to send cookies
+    origin: normalizedClientUrl,
+    credentials: true,
   })
 );
 
