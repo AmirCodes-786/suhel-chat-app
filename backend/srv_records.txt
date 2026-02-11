@@ -1,0 +1,19 @@
+Non-authoritative answer:
+Server:  UnKnown
+Address:  10.242.153.74
+
+_mongodb._tcp.cluster0.wbaqcqp.mongodb.net	SRV service location:
+	  priority       = 0
+	  weight         = 0
+	  port           = 27017
+	  svr hostname   = ac-c9jbhb0-shard-00-01.wbaqcqp.mongodb.net
+_mongodb._tcp.cluster0.wbaqcqp.mongodb.net	SRV service location:
+	  priority       = 0
+	  weight         = 0
+	  port           = 27017
+	  svr hostname   = ac-c9jbhb0-shard-00-02.wbaqcqp.mongodb.net
+_mongodb._tcp.cluster0.wbaqcqp.mongodb.net	SRV service location:
+	  priority       = 0
+	  weight         = 0
+	  port           = 27017
+	  svr hostname   = ac-c9jbhb0-shard-00-00.wbaqcqp.mongodb.net
