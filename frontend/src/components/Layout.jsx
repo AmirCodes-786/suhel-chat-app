@@ -3,6 +3,8 @@ import Navbar from "./Navbar";
 import MobileNav from "./MobileNav";
 
 const Layout = ({ children, showSidebar = false }) => {
+  const isChatPage = typeof window !== 'undefined' && window.location.pathname.startsWith("/chat");
+
   return (
     <div className="min-h-screen">
       <div className="flex">
@@ -11,7 +13,9 @@ const Layout = ({ children, showSidebar = false }) => {
         <div className="flex-1 flex flex-col">
           <Navbar />
 
-          <main className="flex-1 overflow-y-auto pb-20 lg:pb-0">{children}</main>
+          <main className={`flex-1 overflow-y-auto lg:pb-0 ${isChatPage ? "pb-0" : "pb-20"}`}>
+            {children}
+          </main>
         </div>
       </div>
 

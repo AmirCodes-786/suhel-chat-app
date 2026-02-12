@@ -573,6 +573,7 @@
     background: rgba(15, 15, 26, 0.9) !important;
     backdrop-filter: blur(20px) !important;
     border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+    margin-bottom: 0 !important;
   }
   
   /* Prevent any horizontal overflow and fix double header overlap */
@@ -582,6 +583,7 @@
     height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
+    padding-bottom: 0 !important;
   }
 
   .str-chat__channel-header {
