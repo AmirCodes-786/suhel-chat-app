@@ -109,9 +109,11 @@
     0 8px 32px rgba(0, 0, 0, 0.4),
     0 0 1px rgba(255, 255, 255, 0.1) inset !important;
   overflow: hidden;
-  animation: fade-in-up 0.5s ease-out;
+  animation: message-pop 0.4s ease-out;
   position: relative;
   z-index: 1;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 /* --- Channel Header --- */
@@ -523,12 +525,18 @@
 @media (max-width: 1024px) {
   .str-chat__container {
     width: 100% !important;
-    height: calc(100dvh - 64px) !important; /* Full height minus navbar */
+    height: 100dvh !important;
     max-width: none !important;
     border-radius: 0 !important;
     border: none !important;
     margin: 0 !important;
     box-shadow: none !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
   }
 
   .str-chat__channel {
@@ -538,22 +546,48 @@
 
 @media (max-width: 768px) {
   .str-chat__container {
-    height: calc(100dvh - 64px) !important; /* Full visible height */
+    height: 100dvh !important;
     border-radius: 0 !important;
   }
 
+  /* Hide ugly scrollbars but keep functionality */
+  .str-chat__list {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    padding: 12px 14px !important;
+  }
+  
+  .str-chat__list::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
   .str-chat__message-text-inner {
-    font-size: 0.9rem !important;
+    font-size: 0.95rem !important;
+    padding: 2px 0 !important;
   }
   
   .str-chat__message-simple {
-    max-width: 85% !important;
+    max-width: 75% !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* WhatsApp-style message alignment overrides */
+  .str-chat__message--me {
+    margin-right: 0 !important;
+    margin-left: auto !important;
+    justify-content: flex-end !important;
+  }
+
+  .str-chat__message--other {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    justify-content: flex-start !important;
   }
 
   .str-chat__input-flat textarea,
   .str-chat__input-flat input {
-    font-size: 0.9rem !important;
-    padding: 10px 12px !important;
+    font-size: 1rem !important;
+    padding: 12px 16px !important;
   }
   
   /* Hide sidebar on mobile/tablet for chat page */
@@ -561,16 +595,13 @@
     display: none !important;
   }
   
-  /* Add breathing room on the sides for mobile chat */
-  .str-chat__list {
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-
   .str-chat__message-input {
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-    max-width: 100% !important;
+    padding: 10px 14px !important;
+    background: rgba(15, 15, 26, 0.9) !important;
+    backdrop-filter: blur(20px) !important;
+    position: sticky !important;
+    bottom: 0 !important;
+    width: 100% !important;
     box-sizing: border-box !important;
   }
   
@@ -578,6 +609,15 @@
   .str-chat__main-panel {
     max-width: 100vw !important;
     overflow-x: hidden !important;
+  }
+
+  /* Compact WhatsApp Header on mobile */
+  .str-chat__channel-header {
+    height: auto !important;
+    padding: 8px 12px !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 50 !important;
   }
 }
 
