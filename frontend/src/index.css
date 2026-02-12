@@ -570,6 +570,7 @@
   /* Ensure the input bar is truly sticky/fixed at bottom */
   .str-chat__message-input {
     padding: 10px !important;
+    padding-bottom: calc(env(safe-area-inset-bottom, 12px) + 10px) !important;
     background: rgba(15, 15, 26, 0.9) !important;
     backdrop-filter: blur(20px) !important;
     border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
@@ -582,8 +583,16 @@
     overflow-x: hidden !important;
     height: 100% !important;
     display: flex !important;
+    flex-grow: 1 !important;
     flex-direction: column !important;
     padding-bottom: 0 !important;
+  }
+
+  .str-chat__list {
+    flex-grow: 1 !important;
+    height: 100% !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
   }
 
   .str-chat__channel-header {
@@ -598,14 +607,6 @@
   .str-chat__header-livestream,
   .str-chat__channel-header {
     padding: 10px 12px !important;
-  }
-
-  .str-chat__message-input {
-    padding: 10px !important;
-  }
-  
-  .str-chat__message-simple {
-    max-width: 90% !important;
   }
 }
 
