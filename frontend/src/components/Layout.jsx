@@ -13,7 +13,7 @@ const Layout = ({ children, showSidebar = false }) => {
         <div className="flex-1 flex flex-col">
           <Navbar />
 
-          <main className={`flex-1 overflow-y-auto lg:pb-0 ${isChatPage ? "pb-0" : "pb-20"}`}>
+          <main className={`flex-1 lg:pb-0 ${isChatPage ? "h-[100dvh] overflow-hidden pb-0" : "overflow-y-auto pb-20"}`}>
             {children}
           </main>
         </div>
