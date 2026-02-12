@@ -185,10 +185,10 @@ const ChatPage = () => {
   if (loading || !chatClient || !channel) return <ChatLoader />;
 
   return (
-    <div className="h-[calc(100dvh-4rem)]">
+    <div className="h-full">
       <Chat client={chatClient}>
         <Channel channel={channel} Message={CustomMessage}>
-          <div className="w-full relative">
+          <div className="w-full h-full relative flex flex-col">
             <div className="absolute top-3 right-4 z-10 flex items-center gap-2">
               <ClearChatButton channel={channel} />
               <CallButton handleVideoCall={handleVideoCall} />
