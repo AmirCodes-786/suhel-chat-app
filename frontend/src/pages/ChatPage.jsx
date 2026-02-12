@@ -185,93 +185,98 @@ const ChatPage = () => {
   if (loading || !chatClient || !channel) return <ChatLoader />;
 
   return (
-    <div className="h-full">
-      <Chat client={chatClient}>
-        <Channel channel={channel} Message={CustomMessage}>
-          <div className="w-full h-full relative flex flex-col">
-            <div className="absolute top-3 right-4 z-10 flex items-center gap-2">
-              <ClearChatButton channel={channel} />
-              <CallButton handleVideoCall={handleVideoCall} />
+    <div className="h-full relative md:static">
+      {/* Mobile: Fixed Full Screen Overlay */}
+      <div className="fixed inset-0 z-50 md:static md:z-auto bg-[var(--chat-bg-from)] flex flex-col h-[100dvh] md:h-auto">
+        <Chat client={chatClient}>
+          <Channel channel={channel} Message={CustomMessage}>
+            <div className="w-full h-full relative flex flex-col">
+              <div className="absolute top-3 right-4 z-10 flex items-center gap-2">
+                <ClearChatButton channel={channel} />
+                <CallButton handleVideoCall={handleVideoCall} />
+              </div>
+              <Window>
+                <ChannelHeader />
+                <MessageList />
+                <MessageInput focus />
+              </Window>
             </div>
-            <Window>
-              <ChannelHeader />
-              <MessageList />
-              <MessageInput focus />
-            </Window>
-          </div>
-          <Thread />
-        </Channel>
-      </Chat>
+            <Thread />
+          </Channel>
+        </Chat>
+      </div>
 
       {/* Delete Confirmation Modal */}
-      {deleteModal.show && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div
-            className="w-full max-w-sm rounded-2xl p-6 relative"
-            style={{
-              background: "rgba(26, 26, 46, 0.95)",
-              border: "1px solid rgba(255, 255, 255, 0.08)",
-              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.5)",
-              animation: "fade-in-up 0.2s ease-out",
-            }}
-          >
-            <button
-              onClick={() => setDeleteModal({ show: false, type: "", message: null })}
-              className="absolute top-3 right-3 p-1 rounded-full hover:bg-white/10 transition-colors"
-              style={{ color: "#a1a1aa" }}
+      {
+        deleteModal.show && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+            <div
+              className="w-full max-w-sm rounded-2xl p-6 relative"
+              style={{
+                background: "rgba(26, 26, 46, 0.95)",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
+                boxShadow: "0 8px 32px rgba(0, 0, 0, 0.5)",
+                animation: "fade-in-up 0.2s ease-out",
+              }}
             >
-              <XIcon className="size-4" />
-            </button>
-
-            <div className="flex items-center gap-3 mb-4">
-              <div
-                className="p-2.5 rounded-xl"
-                style={{ background: "rgba(239, 68, 68, 0.15)" }}
-              >
-                <AlertTriangleIcon className="size-5" style={{ color: "#f87171" }} />
-              </div>
-              <h3 className="font-semibold text-lg" style={{ color: "#e4e4e7" }}>
-                Delete Message
-              </h3>
-            </div>
-
-            <p className="text-sm mb-6" style={{ color: "#a1a1aa", lineHeight: "1.6" }}>
-              {deleteModal.type === "forMe"
-                ? "This will hide the message from your view only. Other participants can still see it."
-                : <>This will delete the message for <strong style={{ color: "#f87171" }}>everyone</strong> in this chat. This action cannot be undone.</>
-              }
-            </p>
-
-            <div className="flex gap-3 justify-end">
               <button
                 onClick={() => setDeleteModal({ show: false, type: "", message: null })}
-                className="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/10"
-                style={{
-                  color: "#a1a1aa",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                }}
+                className="absolute top-3 right-3 p-1 rounded-full hover:bg-white/10 transition-colors"
+                style={{ color: "#a1a1aa" }}
               >
-                Cancel
+                <XIcon className="size-4" />
               </button>
-              <button
-                onClick={confirmDelete}
-                className="px-4 py-2 rounded-xl text-sm font-medium text-white transition-all duration-200 hover:opacity-90"
-                style={{
-                  background: deleteModal.type === "forMe"
-                    ? "linear-gradient(135deg, #667eea, #764ba2)"
-                    : "linear-gradient(135deg, #ef4444, #dc2626)",
-                  boxShadow: deleteModal.type === "forMe"
-                    ? "0 2px 8px rgba(102, 126, 234, 0.3)"
-                    : "0 2px 8px rgba(239, 68, 68, 0.3)",
-                }}
-              >
-                {deleteModal.type === "forMe" ? "Hide Message" : "Delete for Everyone"}
-              </button>
+
+              <div className="flex items-center gap-3 mb-4">
+                <div
+                  className="p-2.5 rounded-xl"
+                  style={{ background: "rgba(239, 68, 68, 0.15)" }}
+                >
+                  <AlertTriangleIcon className="size-5" style={{ color: "#f87171" }} />
+                </div>
+                <h3 className="font-semibold text-lg" style={{ color: "#e4e4e7" }}>
+                  Delete Message
+                </h3>
+              </div>
+
+              <p className="text-sm mb-6" style={{ color: "#a1a1aa", lineHeight: "1.6" }}>
+                {deleteModal.type === "forMe"
+                  ? "This will hide the message from your view only. Other participants can still see it."
+                  : <>This will delete the message for <strong style={{ color: "#f87171" }}>everyone</strong> in this chat. This action cannot be undone.</>
+                }
+              </p>
+
+              <div className="flex gap-3 justify-end">
+                <button
+                  onClick={() => setDeleteModal({ show: false, type: "", message: null })}
+                  className="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/10"
+                  style={{
+                    color: "#a1a1aa",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={confirmDelete}
+                  className="px-4 py-2 rounded-xl text-sm font-medium text-white transition-all duration-200 hover:opacity-90"
+                  style={{
+                    background: deleteModal.type === "forMe"
+                      ? "linear-gradient(135deg, #667eea, #764ba2)"
+                      : "linear-gradient(135deg, #ef4444, #dc2626)",
+                    boxShadow: deleteModal.type === "forMe"
+                      ? "0 2px 8px rgba(102, 126, 234, 0.3)"
+                      : "0 2px 8px rgba(239, 68, 68, 0.3)",
+                  }}
+                >
+                  {deleteModal.type === "forMe" ? "Hide Message" : "Delete for Everyone"}
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+    </div >
   );
 };
 export default ChatPage;
