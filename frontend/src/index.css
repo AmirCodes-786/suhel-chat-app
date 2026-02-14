@@ -588,10 +588,12 @@ body {
   /* WhatsApp-style bubble spacing */
   .str-chat__list {
     padding: 10px 12px 10px 12px !important;
-    flex: 1 1 auto !important;
+    flex: 1 1 0% !important; /* Critical for scroll */
+    min-height: 0 !important; /* Allow flex shrinking */
+    height: 100% !important; /* Fill available space but don't overflow */
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
-    height: 0 !important; /* Forces flex child to scroll */
+    overscroll-behavior-y: contain !important; /* Prevent chain scrolling */
   }
 
   /* Make sure header stays at top */
