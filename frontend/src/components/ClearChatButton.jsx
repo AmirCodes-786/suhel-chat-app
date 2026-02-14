@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Trash2Icon, AlertTriangleIcon, XIcon } from "lucide-react";
 import toast from "react-hot-toast";
+import { clearChat } from "../lib/api";
 
 const ClearChatButton = ({ channel }) => {
     const [showConfirm, setShowConfirm] = useState(false);
@@ -9,12 +10,13 @@ const ClearChatButton = ({ channel }) => {
     const handleClearChat = async () => {
         setClearing(true);
         try {
-            await channel.truncate({ hard_delete: true }); // no "deleted" placeholders
+            console.log("Initiating chat clear via backend...");
+            await clearChat(channel.id);
             toast.success("Chat cleared successfully");
             setShowConfirm(false);
         } catch (error) {
             console.error("Error clearing chat:", error);
-            toast.error("Failed to clear chat");
+            toast.error(error.message || "Failed to clear chat");
         } finally {
             setClearing(false);
         }

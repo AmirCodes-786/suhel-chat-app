@@ -187,11 +187,11 @@ const ChatPage = () => {
   return (
     <div className="h-full relative md:static">
       {/* Mobile: Fixed Full Screen Overlay */}
-      <div className="fixed inset-0 z-50 md:static md:z-auto bg-[var(--chat-bg-from)] flex flex-col h-[100dvh] md:h-auto">
+      <div className="fixed inset-0 z-50 md:static md:z-auto bg-[var(--chat-bg-from)] flex flex-col h-full">
         <Chat client={chatClient}>
           <Channel channel={channel} Message={CustomMessage}>
             <div className="w-full h-full relative flex flex-col">
-              <div className="absolute top-3 right-4 z-10 flex items-center gap-2">
+              <div className="absolute top-3 right-4 z-50 flex items-center gap-2 pointer-events-auto">
                 <ClearChatButton channel={channel} />
                 <CallButton handleVideoCall={handleVideoCall} />
               </div>

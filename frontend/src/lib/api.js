@@ -68,3 +68,8 @@ export async function getStreamToken() {
   const response = await axiosInstance.get("/chat/token");
   return response.data;
 }
+
+export const clearChat = async (channelId) => {
+  const response = await axiosInstance.post("/chat/clear", { channelId });
+  return response.data;
+};
