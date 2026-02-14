@@ -649,6 +649,17 @@ body {
   .str-chat__ul {
     align-items: stretch !important;
   }
+
+  /* Force side-to-side alignment */
+  .str-chat__message--me {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  .str-chat__message--other {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+  }
 }
 
 /* --- NON-TOUCH HOVER EFFECTS ONLY --- */
