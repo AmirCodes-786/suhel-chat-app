@@ -159,12 +159,6 @@ body {
   transition: all 0.3s ease !important;
 }
 
-.str-chat__avatar:hover {
-  border-color: var(--chat-accent) !important;
-  transform: scale(1.05);
-  box-shadow: 0 0 12px rgba(102, 126, 234, 0.3);
-}
-
 .str-chat__avatar img {
   border-radius: 50% !important;
   object-fit: cover !important;
@@ -245,11 +239,6 @@ body {
   transition: all 0.2s ease !important;
 }
 
-.str-chat__message--me .str-chat__message-bubble:hover {
-  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.35) !important;
-  transform: translateY(-1px);
-}
-
 /* Other's messages */
 .str-chat__message--other .str-chat__message-bubble {
   background: var(--chat-bubble-other) !important;
@@ -259,11 +248,6 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.06) !important;
   backdrop-filter: blur(8px);
   transition: all 0.2s ease !important;
-}
-
-.str-chat__message--other .str-chat__message-bubble:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Message text */
@@ -454,18 +438,61 @@ body {
   backdrop-filter: blur(16px) !important;
 }
 
-.str-chat__message-actions-list-item button {
-  color: var(--chat-text) !important;
-  font-family: var(--chat-font) !important;
-  transition: all 0.2s ease !important;
-}
-
+/* Fix: Target both option and li to ensure hover works */
+.str-chat__message-actions-list-item:hover,
 .str-chat__message-actions-list-item button:hover {
-  background: rgba(102, 126, 234, 0.15) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
   color: #fff !important;
 }
 
-/* --- Custom Message Action Buttons --- */
+/* --- Quoted Message / Reply Preview (Input & Message List) --- */
+.str-chat__quoted-message-preview,
+.str-chat__quoted-message-bubble,
+.str-chat__message-attachment--card,
+.str-chat__player-wrapper,
+.str-chat__website-card,
+.str-chat__giphy-card, 
+.str-chat__file-attachment {
+  background: rgba(255, 255, 255, 0.05) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border: none !important; /* Removed full border */
+  border-left: 3px solid var(--chat-accent) !important; /* Accent left border for cleaner look */
+  border-radius: 4px 12px 12px 4px !important;
+  color: var(--chat-text) !important;
+  margin-top: 4px !important;
+  margin-bottom: 8px !important;
+  box-shadow: none !important; /* Ensure no outer shadow/box */
+}
+
+/* Ensure text inside quoted bubbles is visible */
+.str-chat__quoted-message-text,
+.str-chat__quoted-message-bubble .str-chat__message-text,
+.str-chat__quoted-message-preview-content-inner,
+.str-chat__quoted-message-preview-content-inner .str-chat__message-text {
+  color: var(--chat-text) !important;
+  font-size: 0.85rem !important;
+}
+
+/* Ensure header/sender name is visible */
+.str-chat__quoted-message-preview-header,
+.str-chat__quoted-message-author {
+  color: var(--chat-accent) !important;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
+  margin-bottom: 2px !important;
+}
+
+/* Fix for possible internal white containers & remove internal borders */
+.str-chat__quoted-message-preview *,
+.str-chat__quoted-message-bubble * {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Custom Message Action Buttons */
 .custom-message-actions {
   display: flex;
   flex-direction: column;
@@ -609,6 +636,66 @@ body {
     flex-direction: column !important;
     overflow: hidden !important;
     padding: 0 !important;
+  }
+
+  /* Fix: Ensure list items take full width to allow side-by-side alignment */
+  .str-chat__li {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Remove any centering on mobile */
+  .str-chat__ul {
+    align-items: stretch !important;
+  }
+}
+
+/* --- NON-TOUCH HOVER EFFECTS ONLY --- */
+@media (hover: hover) {
+  .str-chat__avatar:hover {
+    border-color: var(--chat-accent) !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 12px rgba(102, 126, 234, 0.3);
+  }
+
+  .str-chat__message-simple:hover {
+    transform: translateY(-1px);
+  }
+
+  .str-chat__message--me .str-chat__message-bubble:hover {
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.35) !important;
+    transform: translateY(-1px);
+  }
+
+  .str-chat__message--other .str-chat__message-bubble:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  .str-chat__send-button:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.5) !important;
+  }
+  
+  .custom-action-btn:hover {
+    background: rgba(102, 126, 234, 0.15);
+    color: #fff !important;
+  }
+}
+
+/* Reset hover styles for touch/default if not supported (or to prevent sticking) */
+@media (hover: none) {
+  .str-chat__message--other .str-chat__message-bubble:active {
+    background: rgba(255, 255, 255, 0.08) !important; 
+  }
+  
+  /* Disable transforms on touch to prevent layout jumps */
+  .str-chat__message-simple:hover,
+  .str-chat__message--me .str-chat__message-bubble:hover,
+  .str-chat__send-button:hover {
+    transform: none !important;
+    box-shadow: none !important;
   }
 }
 
